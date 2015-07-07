@@ -73,6 +73,10 @@ def index():
 if __name__ == '__main__':
     models.initialize()
 
-    models.Entry.select().delete()
+    if not models.Entry.get(models.Entry.ip == '93.184.204.215'):
+        models.Entry.create(
+        name='fotoply',
+        ip='93.184.204.215',
+        port='7077')
 
     app.run(debug=DEBUG, port=PORT, host=HOST)
