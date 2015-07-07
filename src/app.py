@@ -39,9 +39,9 @@ def is_online(ip):
         return 'invalid entry'
 
     # 2 cycles and 0 bytes sent
-    result = os.popen('ping -c 1 -s 0 {}'.format(ip)).read()
+    result = os.system('ping -c 1 -s 0 {}'.format(ip))
 
-    if '1 packets received' in result:
+    if result == 0:
         target.update(
             online=True
         ).execute()
