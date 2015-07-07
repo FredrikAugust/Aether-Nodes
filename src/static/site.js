@@ -1,6 +1,6 @@
 // Author is Fredrik A. Madsen-Malmo
 
-$(document).load(function() {
+$(window).load(function() {
 	$('.entry').each(function(index, element) {
 		$.ajax({
 			type: 'POST',
