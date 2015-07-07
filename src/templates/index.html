@@ -24,7 +24,7 @@
 				</div>
 			{% endfor %}
 		{% endwith %}
-		
+
 		<h1>New entry</h1><hr>
 		<form class='form' action='{{ url_for('index') }}' method='POST'>
 			{{ form.hidden_tag() }}
@@ -39,7 +39,7 @@
 
 				{{ field(placeholder=field.label.text, class_='form-control form-group') }}
 			{% endfor %}
-			<button class='btn btn-default' type='submit'>Create entry</button>
+			<button class='btn btn-default submit_new' type='submit'>Create entry</button>
 		</form>
 
 		<hr>
