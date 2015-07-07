@@ -16,14 +16,14 @@ DATABASE = PostgresqlDatabase(result.group('database'), host=result.group('serve
 # Models
 
 class Entry(Model):
-	timestamp = DateTimeField(default=datetime.datetime.now)
 	name = TextField(default='Anonymous')
 	ip = TextField()
+	port = TextField()
 	online = BooleanField(default=False)
 
 	class Meta:
 		database = DATABASE
-		order_by = ('online', '-datetime')
+		order_by = ('online',)
 
 # Init
 
