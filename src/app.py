@@ -2,6 +2,8 @@ __author__ = 'Fredrik A. Madsen-Malmo'
 
 from flask import Flask, flash, render_template, g
 
+import socket
+
 import models
 import forms
 
@@ -39,6 +41,7 @@ def is_online(ip):
         return 'invalid entry'
 
     try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, int(target.port)))
     except Exception:
         return 'invalid IP'
