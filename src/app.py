@@ -36,17 +36,17 @@ def is_online(ip):
     try:
         target = models.Entry.get(models.Entry.id == ip)
     except Exception:
-        return False
+        return 'offline'
 
     # 2 cycles and 0 bytes sent
     result = os.popen('ping -c 2 -s 0 {}'.format(ip)).read()
 
-    if not (result.contains('Unknown host') or result.conatins('timeout')):
+    if not (result.contains('Unknown host') or result.contains('timeout')):
         target.update(
             online=True
         ).execute()
 
-        return True
+        return 'online'
 
 # Routes
 
@@ -57,11 +57,13 @@ def index():
 
     if form.validate_on_submit():
         try:
+            online_stat = is_online(form.ip.data)
+
             models.Entry.create(
                 name=form.name.data,
                 ip=form.ip.data,
                 port=form.port.data,
-                online=is_online(form.ip.data))
+                online=online_stat)
 
         except Exception:
             pass
