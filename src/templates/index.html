@@ -16,7 +16,7 @@
 <body>
 	<div class='container'>
 		<h1>New entry</h1>
-		<form class='form' action='{{ url_for('index') }}' method='POST'>
+		<form class='form' action='{{ url_for('new') }}' method='POST'>
 			{{ form.hidden_tag() }}
 			{% for field in form %}
 				{% if field.errors %}

@@ -1,6 +1,6 @@
 __author__ = 'Fredrik A. Madsen-Malmo'
 
-from flask import Flask, flash, render_template, g
+from flask import Flask, flash, render_template, g, redirect
 
 import socket
 
@@ -57,10 +57,9 @@ def is_online(ip):
 
 # Routes
 
-@app.route('/', methods=['POST'])
-def index():
+@app.route('/new', methods=['POST'])
+def new():
     form = forms.EntryForm()
-    stream = models.Entry.select()
 
     if form.validate_on_submit():
         try:
@@ -74,6 +73,13 @@ def index():
 
         except Exception:
             pass
+
+    return redirect(url_for('index'))
+
+@app.route('/')
+def index():
+    stream = models.Entry.select()
+    form = forms.EntryForm()
     
     return render_template('index.html', form=form, stream=stream)
 
