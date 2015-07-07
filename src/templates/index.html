@@ -7,10 +7,20 @@
 	<h1> Something works!</h1>
 
 	<h1>Form</h1>
-	{{ form.hidden_tag() }}
-	{% for field in form %}
-		{{ render_field(field) }}
-	{% endfor %}
+	<form class='form' action='{{ url_for('index') }}'>
+		{{ form.hidden_tag() }}
+		{% for field in form %}
+			{% if field.errors %}
+			{% for error in field.errors %}
+				<span class='fielderror'>
+					{{ error }}
+				</span>
+				{% endfor %}
+			{% endif %}
+
+			{{ field(placeholder=field.label.text, class_='form-control') }}
+		{% endfor %}
+	</form>
 
 	<h1>Entries</h1>
 	<table>
