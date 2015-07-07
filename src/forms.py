@@ -32,9 +32,7 @@ def port_open(form, field):
 
 class EntryForm(Form):
 	name = StringField(
-		'name',
-		validators=[
-			DataRequired()])
+		'name')
 
 	ip = StringField(
 		'IP',
