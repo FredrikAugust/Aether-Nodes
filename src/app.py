@@ -1,6 +1,6 @@
 __author__ = 'Fredrik A. Madsen-Malmo'
 
-from flask import Flask, flash, render_template, g, redirect
+from flask import Flask, flash, render_template, g, redirect, url_for
 
 import socket
 
