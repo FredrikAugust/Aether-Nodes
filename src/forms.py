@@ -15,8 +15,12 @@ def ip_exist(form, field):
 		raise ValidationError('That IP is already registered.')
 
 def port_open(form, field):
-	# Don't know what this does, but I got it from SE and it works.
-	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	try:
+		socket.setdefaulttimeout(5.0)
+		# Don't know what this does, but I got it from SE and it works.
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	except Exception:
+		pass
 
 	try:
 		result = sock.connect_ex((field.data, int(form.port.data)))
