@@ -34,19 +34,21 @@ def after_request(response):
 @app.route('/online/<ip>', methods=['POST', 'GET'])
 def is_online(ip):
     try:
-        target = models.Entry.get(models.Entry.id == ip)
+        target = models.Entry.get(models.Entry.ip == ip)
     except Exception:
-        return 'offline'
+        return 'invalid entry'
 
     # 2 cycles and 0 bytes sent
-    result = os.popen('ping -c 2 -s 0 {}'.format(ip)).read()
+    result = os.popen('ping -c 1 -s 0 {}'.format(ip)).read()
 
-    if not (result.contains('Unknown host') or result.contains('timeout')):
+    if result.contains('1 packets received'):
         target.update(
             online=True
         ).execute()
 
         return 'online'
+    else:
+        return 'offline'
 
 # Routes
 
