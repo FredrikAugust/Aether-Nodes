@@ -19,7 +19,7 @@ def port_open(form, field):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	try:
-		result = sock.connect_ex((form.ip.data, field.data))
+		result = sock.connect_ex((field.data, int(form.port.data)))
 	except Exception:
 		raise ValidationError('Invalid values.')
 
@@ -40,10 +40,10 @@ class EntryForm(Form):
 		'IP',
 		validators=[
 			DataRequired(),
-			ip_exist])
+			ip_exist,
+			port_open])
 
 	port = StringField(
 		'port',
 		validators=[
-			DataRequired(),
-			port_open])
+			DataRequired()])
