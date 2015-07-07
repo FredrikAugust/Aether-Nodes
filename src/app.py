@@ -57,7 +57,7 @@ def is_online(ip):
 
 # Routes
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
     stream = models.Entry.select()
     form = forms.EntryForm()
