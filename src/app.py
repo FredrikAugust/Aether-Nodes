@@ -53,6 +53,7 @@ def is_online(ip):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     form = forms.EntryForm()
+    stream = models.Entry.select()
 
     if form.validate_on_submit():
         try:
@@ -60,15 +61,12 @@ def index():
                 name=form.name.data,
                 ip=form.ip.data,
                 port=form.port.data,
-                online=is_online(form.ip.data)
-            )
+                online=is_online(form.ip.data))
 
         except Exception:
             pass
-
-    stream = models.Entry.select()
-
-	return render_template('index.html', form=form, stream=stream)
+    
+    return render_template('index.html', form=form, stream=stream)
 
 # Start app
 
