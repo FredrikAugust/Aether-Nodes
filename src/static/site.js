@@ -4,18 +4,16 @@ $(document).load(function() {
 	$('.entry').each(function(index, element) {
 		$.ajax({
 			type: 'POST',
-			url: $(element).data('url'),
-			data: $(element).data('ip')
+			url: $(element).data('url')
 		}).done(function(data) {
-			alert(data);
-		});
-	});
+			var onlineChild = $(element).find('.online');
+			$(onlineChild).data('online', data);
 
-	$('.online').each(function(index, element) {
-		if ($(element).data('online') == 'True') {
-			$(element).text('Online');
-		} else {
-			$(element).text('Offline');
-		}
+			if ($(onlineChild).data('online') == 'True') {
+				$(onlineChild).text('Online');
+			} else {
+				$(onlineChild).text('Offline');
+			}
+		});
 	});
 });

@@ -33,7 +33,7 @@ def after_request(response):
 
 # Other functions
 
-@app.route('/online/<ip>', methods=['POST'])
+@app.route('/online/<ip>', methods=['POST', 'GET'])
 def is_online(ip):
     try:
         target = models.Entry.get(models.Entry.ip == ip)
