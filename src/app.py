@@ -57,7 +57,7 @@ def is_online(ip):
 
 # Routes
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['POST'])
 def index():
     form = forms.EntryForm()
     stream = models.Entry.select()
@@ -67,9 +67,9 @@ def index():
             online_stat = is_online(form.ip.data)
 
             models.Entry.create(
-                name=form.name.data,
-                ip=form.ip.data,
-                port=form.port.data,
+                name=form.name.data.strip(),
+                ip=form.ip.data.strip(),
+                port=form.port.data.strip(),
                 online=online_stat)
 
         except Exception:

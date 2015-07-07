@@ -2,47 +2,64 @@
 <html>
 <head>
 	<title>Aether Nodes</title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 </head>
 <body>
-	<h1> Something works!</h1>
+	<div class='container'>
+		<h1>New entry</h1>
+		<form class='form' action='{{ url_for('index') }}' method='POST'>
+			{{ form.hidden_tag() }}
+			{% for field in form %}
+				{% if field.errors %}
+					{% for error in field.errors %}
+						<span class='fielderror'>
+							{{ error }}
+						</span>
+					{% endfor %}
+				{% endif %}
 
-	<h1>Form</h1>
-	<form class='form' action='{{ url_for('index') }}'>
-		{{ form.hidden_tag() }}
-		{% for field in form %}
-			{% if field.errors %}
-			{% for error in field.errors %}
-				<span class='fielderror'>
-					{{ error }}
-				</span>
-				{% endfor %}
-			{% endif %}
-
-			{{ field(placeholder=field.label.text, class_='form-control') }}
-		{% endfor %}
-	</form>
-
-	<h1>Entries</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>IP</th>
-				<th>Port</th>
-				<th>Online</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for entry in stream %}
-				<tr>
-					<td>{{ entry.name }}</td>
-					<td>{{ entry.ip }}</td>
-					<td>{{ entry.port }}</td>
-					<td>{{ entry.online}}</td>
-					<td><a onClick='alert("move to ajax")' href='{{ url_for('is_online', ip=entry.ip) }}'>Check online status</a></td>
-				</tr>
+				{{ field(placeholder=field.label.text, class_='form-control') }}
 			{% endfor %}
-		</tbody>
-	</table>
+		</form>
+
+		<hr>
+
+		<h1>Entries</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>IP</th>
+					<th>Port</th>
+					<th>Online</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for entry in stream %}
+					<tr>
+						<td>{{ entry.name }}</td>
+						<td>{{ entry.ip }}</td>
+						<td>{{ entry.port }}</td>
+						<td>{{ entry.online}}</td>
+						<td><a class='small online_check' data-online='{{ url_for('is_online', ip=entry.ip) }}'>Check online status</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
