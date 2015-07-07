@@ -1,6 +1,5 @@
 __author__ = 'Fredrik A. Madsen-Malmo'
 
-import socket
 from flask import Flask, flash, render_template, g
 
 import models
@@ -30,21 +29,55 @@ def after_request(response):
 
 	return response
 
+# Other functions
+
+@app.route('/online/<ip>', methods=['POST', 'GET'])
+def is_online(ip):
+    try:
+        target = models.Entry.get(models.Entry.id == ip)
+    except Exception:
+        return False
+
+    # 2 cycles and 0 bytes sent
+    result = os.popen('ping -c 2 -s 0 {}'.format(ip))
+
+    if not (result.contains('Unknown host') or result.conatins('timeout')):
+        target.update(
+            online=True
+        ).execute()
+
+        return True
+
 # Routes
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-	return render_template('index.html')
+    form = forms.EntryForm()
+
+    if form.validate_on_submit():
+        try:
+            models.Entry.create(
+                name=form.name.data,
+                ip=form.ip.data,
+                port=form.port.data,
+                online=is_online(form.ip.data)
+            )
+
+        except Exception:
+            pass
+
+    stream = models.Entry.select()
+
+	return render_template('index.html', form=form, stream=stream)
 
 # Start app
 
 if __name__ == '__main__':
     models.initialize()
-    try:
-        models.Entry.create(
-        	
-        )
-    except Exception:
-        pass
+
+    models.Entry.create(
+        name='fotoply',
+        ip='93.184.204.215',
+        port='7077')
 
     app.run(debug=DEBUG, port=PORT, host=HOST)

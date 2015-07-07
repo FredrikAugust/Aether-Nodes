@@ -8,16 +8,30 @@ import re
 
 full = os.environ.get('DATABASE_URL', 'error')
 
-# regex <3
-result = re.search('(?P<dbname>[\w]+)\:\/\/(?P<username>[\w]+)\:(?P<password>[\w\d]+)\@(?P<server>[\w\d\.\-]+):(?P<port>[\d]+)\/(?P<database>[\w\d]+)\n', full, re.VERBOSE)
+# Get db content
 
-DATABASE = PostgresqlDatabase(result.group('database'), host=result.group('server'), port=result.group('port'), user=result.group('username'), password=result.group('password'))
+result = re.search(
+			'''
+				(?P<dbname>[\w]+)\:\/\/
+				(?P<username>[\w]+)\:
+				(?P<password>[\w\d]+)\@
+				(?P<server>[\w\d\.\-]+):
+				(?P<port>[\d]+)\/
+				(?P<database>[\w\d]+)\n
+			''', 
+			full, re.VERBOSE|re.MULTILINE)
+
+DATABASE = PostgresqlDatabase(result.group('database'), 
+				host=result.group('server'), 
+				port=result.group('port'), 
+				user=result.group('username'), 
+				password=result.group('password'))
 
 # Models
 
 class Entry(Model):
 	name = TextField(default='Anonymous')
-	ip = TextField()
+	ip = TextField(unique=True)
 	port = TextField()
 	online = BooleanField(default=False)
 
