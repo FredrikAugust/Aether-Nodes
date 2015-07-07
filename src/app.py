@@ -73,7 +73,9 @@ def index():
 if __name__ == '__main__':
     models.initialize()
 
-    if not models.Entry.get(models.Entry.ip == '93.184.204.215'):
+    try:
+        models.Entry.get(models.Entry.ip == '93.184.204.215')
+    except Exception:
         models.Entry.create(
         name='fotoply',
         ip='93.184.204.215',
