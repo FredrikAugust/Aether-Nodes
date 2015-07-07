@@ -39,7 +39,7 @@ def is_online(ip):
         return False
 
     # 2 cycles and 0 bytes sent
-    result = os.popen('ping -c 2 -s 0 {}'.format(ip))
+    result = os.popen('ping -c 2 -s 0 {}'.format(ip)).read()
 
     if not (result.contains('Unknown host') or result.conatins('timeout')):
         target.update(
