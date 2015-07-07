@@ -7,7 +7,7 @@ import forms
 
 import os
 
-DEBUG = False
+DEBUG = True
 PORT = port = int(os.environ.get('PORT', 33507))
 HOST = '0.0.0.0'
 
