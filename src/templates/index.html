@@ -12,6 +12,8 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel='stylesheet' href='../static/site.css'>
 </head>
 <body>
 	<div class='container'>
@@ -27,14 +29,15 @@
 					{% endfor %}
 				{% endif %}
 
-				{{ field(placeholder=field.label.text, class_='form-control') }}
+				{{ field(placeholder=field.label.text, class_='form-control, form-group') }}
 			{% endfor %}
+			<button type='submit'>Create entry</button>
 		</form>
 
 		<hr>
 
 		<h1>Entries</h1>
-		<table>
+		<table class='table'>
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -45,12 +48,11 @@
 			</thead>
 			<tbody>
 				{% for entry in stream %}
-					<tr>
+					<tr class='entry' data-url='{{ url_for('is_online', ip=entry.ip) }}' data-ip='{{ entry.ip }}' data-port='{{ entry.port }}' >
 						<td>{{ entry.name }}</td>
-						<td>{{ entry.ip }}</td>
-						<td>{{ entry.port }}</td>
-						<td>{{ entry.online}}</td>
-						<td><a class='small online_check' data-online='{{ url_for('is_online', ip=entry.ip) }}'>Check online status</a></td>
+						<td class='ip'>{{ entry.ip }}</td>
+						<td class='port'>{{ entry.port }}</td>
+						<td class='online-{{ entry.online }}' data-online='{{ entry.online }}'></td>
 					</tr>
 				{% endfor %}
 			</tbody>
@@ -61,5 +63,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script src='../static/site.js'></script>
 </body>
 </html>

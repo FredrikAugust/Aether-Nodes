@@ -33,27 +33,27 @@ def after_request(response):
 
 # Other functions
 
-@app.route('/online/<ip>', methods=['POST', 'GET'])
+@app.route('/online/<ip>', methods=['POST'])
 def is_online(ip):
     try:
         target = models.Entry.get(models.Entry.ip == ip)
     except Exception:
-        return 'invalid entry'
+        return 'False'
 
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, int(target.port)))
     except Exception:
-        return 'invalid IP'
+        return 'False'
 
     if result == 0:
         target.update(
             online=True
         ).execute()
 
-        return 'online'
+        return 'True'
     else:
-        return 'offline'
+        return 'True'
 
 # Routes
 
