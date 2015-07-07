@@ -6,3 +6,6 @@
 
 # Databases
 *.db
+
+# Virtualenv
+venv/
