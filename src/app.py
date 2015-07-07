@@ -38,8 +38,10 @@ def is_online(ip):
     except Exception:
         return 'invalid entry'
 
-    # 2 cycles and 0 bytes sent
-    result = os.system('ping -c 1 -s 0 {}'.format(ip))
+    try:
+        result = sock.connect_ex((ip, int(target.port)))
+    except Exception:
+        return 'invalid IP'
 
     if result == 0:
         target.update(
