@@ -57,10 +57,11 @@ def is_online(ip):
 
 # Routes
 
-@app.route('/new', methods=['POST'])
-def new():
+@app.route('/')
+def index():
+    stream = models.Entry.select()
     form = forms.EntryForm()
-
+    
     if form.validate_on_submit():
         try:
             online_stat = is_online(form.ip.data)
@@ -75,15 +76,9 @@ def new():
 
         except Exception:
             flash('Could not create entry.', 'warning')
-            pass
+        else:
+            flash('Could not create entry.', 'warning')
 
-    return redirect(url_for('index'))
-
-@app.route('/')
-def index():
-    stream = models.Entry.select()
-    form = forms.EntryForm()
-    
     return render_template('index.html', form=form, stream=stream)
 
 # Start app
