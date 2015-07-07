@@ -6,6 +6,8 @@ from flask import Flask, flash, render_template, g
 import models
 import forms
 
+import os
+
 DEBUG = False
 PORT = port = int(os.environ.get('PORT', 33507))
 HOST = '0.0.0.0'
