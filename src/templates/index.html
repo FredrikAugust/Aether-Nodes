@@ -39,7 +39,7 @@
 					<td>{{ entry.ip }}</td>
 					<td>{{ entry.port }}</td>
 					<td>{{ entry.online}}</td>
-					<td><a onClick='alert("move to ajax")' href='{{ url_for('is_online', entry.ip) }}'>Check online status</a></td>
+					<td><a onClick='alert("move to ajax")' href='{{ url_for('is_online', ip=entry.ip) }}'>Check online status</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
