@@ -66,18 +66,24 @@ def index():
         try:
             online_stat = is_online(form.ip.data)
 
-            models.Entry.create(
-                name=form.name.data.strip(),
-                ip=form.ip.data.strip(),
-                port=form.port.data.strip(),
-                online=online_stat)
+            if len(form.name.data.strip()) == 0:
+                models.Entry.create(
+                    ip=form.ip.data.strip(),
+                    port=form.port.data.strip(),
+                    online=online_stat)
+            else:
+                models.Entry.create(
+                    name=form.name.data.strip(),
+                    ip=form.ip.data.strip(),
+                    port=form.port.data.strip(),
+                    online=online_stat)
 
             flash('Entry created.', 'success')
 
         except Exception:
-            flash('Could not create entry.', 'warning')
-        else:
-            flash('Could not create entry.', 'warning')
+            pass
+    else:
+        pass
 
     return render_template('index.html', form=form, stream=stream)
 

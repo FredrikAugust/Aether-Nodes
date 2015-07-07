@@ -16,4 +16,8 @@ $(window).load(function() {
 			}
 		});
 	});
+
+	$('.panel').each(function(index, element) {
+		setTimeout(function() { $(element).fadeOut() }, 2000 + parseInt(index) * 1000)
+	});
 });

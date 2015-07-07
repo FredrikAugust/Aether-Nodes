@@ -11,3 +11,8 @@
 .port, .ip {
 	font-family: monospace;
 }
+
+/* Field errors */
+.fielderror {
+	color: #c0392b;
+}
