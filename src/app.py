@@ -71,7 +71,10 @@ def new():
                 port=form.port.data.strip(),
                 online=online_stat)
 
+            flash('Entry created.', 'success')
+
         except Exception:
+            flash('Could not create entry.', 'warning')
             pass
 
     return redirect(url_for('index'))

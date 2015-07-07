@@ -16,6 +16,14 @@
 	<link rel='stylesheet' href='../static/site.css'>
 </head>
 <body>
+	{% with messages = get_flashed_messages(with_categories=True) %}
+		{% for category, message in messages %}
+			<div class='panel panel-{{ category }}'>
+				<div class='panel-body'>{{ message }}</div>
+			</div>
+		{% endfor %}
+	{% endwith %}
+
 	<div class='container'>
 		<h1>New entry</h1>
 		<form class='form' action='{{ url_for('new') }}' method='POST'>
