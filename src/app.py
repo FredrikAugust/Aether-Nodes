@@ -41,6 +41,7 @@ def is_online(ip):
         return 'False'
 
     try:
+        socket.setdefaulttimeout(5.0)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, int(target.port)))
     except Exception:
@@ -64,19 +65,17 @@ def index():
     
     if form.validate_on_submit():
         try:
-            online_stat = True
-
             if len(form.name.data.strip()) == 0:
                 models.Entry.create(
                     ip=form.ip.data.strip(),
                     port=form.port.data.strip(),
-                    online=online_stat)
+                    online=True)
             else:
                 models.Entry.create(
                     name=form.name.data.strip(),
                     ip=form.ip.data.strip(),
                     port=form.port.data.strip(),
-                    online=online_stat)
+                    online=True)
 
             flash('Entry created.', 'success')
 
