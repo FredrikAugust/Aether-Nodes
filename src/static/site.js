@@ -10,11 +10,13 @@ $(window).load(function() {
 			var onlineChild = $(element).find('.online');
 			$(onlineChild).data('online', data);
 
-			if ($(onlineChild).data('online') == 'True') {
-				$(onlineChild).text('Online');
-			} else {
-				$(onlineChild).text('Offline');
-			}
+		    $(onlineChild).fadeOut(1000, function() {
+		    	if ($(onlineChild).data('online') == 'True') {
+					$(onlineChild).text('Online').fadeIn(1000);;
+				} else {
+					$(onlineChild).text('Offline').fadeIn(1000);;
+				}
+		    });
 		});
 	});
 
