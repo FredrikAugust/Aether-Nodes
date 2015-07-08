@@ -4,7 +4,7 @@ $('tr').hide() // For cool transitions later
 
 $(window).load(function() {
 	$('tr').each(function(i,e) {
-	  $(e).fadeIn(1000 + i*200);
+	  $(e).fadeIn(500 + i*200);
 	});
 
 	// Gets the online status with a simple ajax request
@@ -12,7 +12,7 @@ $(window).load(function() {
 		$.ajax({
 			type: 'POST',
 			url: $(element).data('url'),
-			timeout: 10000,
+			timeout: 5000,
 			error: function(x, t, m) {
 		        if(t === "timeout") {
 					var onlineChild = $(element).find('.online');
