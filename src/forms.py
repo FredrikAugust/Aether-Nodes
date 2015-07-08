@@ -30,7 +30,7 @@ def port_open(form, field):
 	if result == 0:  # That means it works for some reason
 	   pass
 	else:
-	   raise ValidationError('Please open port {} on your router.'.format(form.port.data))
+	   raise ValidationError('Could not connect to {} on port {}.'.format(field.data, form.port.data))
 
 # Form for a new entry
 
