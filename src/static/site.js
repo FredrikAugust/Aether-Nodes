@@ -2,11 +2,7 @@
 
 $('tr').hide() // For cool transitions later
 
-$(window).load(function() {
-	$('tr').each(function(i,e) {
-	  $(e).fadeIn(500 + i*200);
-	});
-
+function getOnline() {
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function(index, element) {
 		$.ajax({
@@ -40,6 +36,14 @@ $(window).load(function() {
 		    }
 		});
 	});
+}
+
+$(window).load(function() {
+	$('tr').each(function(i,e) {
+	  $(e).fadeIn(500 + i*200);
+	});
+
+	getOnline();
 
 	// Fades away each panel after 1 second + 1 second for each panel
 	$('.panel').each(function(index, element) {
@@ -58,4 +62,18 @@ $(window).load(function() {
 			}
 		});
 	});
+});
+
+$('#refresh').on('click', function(e) {
+	e.preventDefault()
+
+	$('.online').each(function(index, element) {
+		$(element).fadeOut(1000, function() {
+			$(element).text('Refreshing..');
+			$(element).css('color', '#7f8c8d');
+			$(element).fadeIn(1000);
+		});
+	});
+
+	getOnline();
 });
