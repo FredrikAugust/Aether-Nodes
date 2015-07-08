@@ -45,22 +45,19 @@ def is_online(ip):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, int(target.port)))
     except Exception:
-        target.update(
-            online=False
-        ).execute()
+        target.online = False
+        target.save()
 
         return 'False'
 
     if result == 0:
-        target.update(
-            online=True
-        ).execute()
+        target.online = True
+        target.save()
 
         return 'True'
     else:
-        target.update(
-            online=False
-        ).execute()
+        target.online = False
+        target.save()
 
         return 'False'
 
