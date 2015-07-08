@@ -5,18 +5,31 @@ $(window).load(function() {
 	$('.entry').each(function(index, element) {
 		$.ajax({
 			type: 'POST',
-			url: $(element).data('url')
-		}).done(function(data) {
-			var onlineChild = $(element).find('.online');
-			$(onlineChild).data('online', data);
+			url: $(element).data('url'),
+			timeout: 5000,
+			error: function(x, t, m) {
+		        if(t === "timeout") {
+					var onlineChild = $(element).find('.online');
+					$(onlineChild).data('online', 'False');
 
-		    $(onlineChild).fadeOut(1000, function() {
-		    	if ($(onlineChild).data('online') == 'True') {
-					$(onlineChild).text('Online').fadeIn(1000);;
-				} else {
-					$(onlineChild).text('Offline').fadeIn(1000);;
-				}
-		    });
+		            $(onlineChild).css('color', '#c0392b');
+					$(onlineChild).text('Offline').fadeIn(1000);
+		        }
+		    },
+		    success: function(data) {
+		    	var onlineChild = $(element).find('.online');
+				$(onlineChild).data('online', data);
+
+			    $(onlineChild).fadeOut(1000, function() {
+			    	if ($(onlineChild).data('online') == 'True') {
+			    		$(onlineChild).css('color', '#27ae60');
+						$(onlineChild).text('Online').fadeIn(1000);
+					} else {
+						$(onlineChild).css('color', '#c0392b');
+						$(onlineChild).text('Offline').fadeIn(1000);
+					}
+			    });
+		    }
 		});
 	});
 

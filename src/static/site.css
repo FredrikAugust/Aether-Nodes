@@ -1,13 +1,3 @@
-/* Online status text */
-
-.online-True {
-	color: #27ae60;
-}
-
-.online-False {
-	color: #c0392b;
-}
-
 .port, .ip {
 	font-family: monospace;
 }
