@@ -6,13 +6,13 @@ $(window).load(function() {
 	$('tr').each(function(i,e) {
 	  $(e).fadeIn(1000 + i*200);
 	});
-	
+
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function(index, element) {
 		$.ajax({
 			type: 'POST',
 			url: $(element).data('url'),
-			timeout: 3000,
+			timeout: 10000,
 			error: function(x, t, m) {
 		        if(t === "timeout") {
 					var onlineChild = $(element).find('.online');
