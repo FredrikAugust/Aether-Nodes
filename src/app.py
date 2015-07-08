@@ -68,7 +68,7 @@ def is_online(ip):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    stream = models.Entry.select()
+    stream = models.Entry.select().order_by(models.Entry.online)
     form = forms.EntryForm()
     
     if form.validate_on_submit():

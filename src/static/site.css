@@ -21,11 +21,11 @@ footer {
 	color:#7f8c8d !important;
 }
 
-#refresh {
+#refresh, .info {
 	color: #337ab7 !important;
 	text-decoration: none !important;
 }
 
-#refresh:hover {
+#refresh:hover, .info:hover {
 	text-decoration: underline !important;
 }
