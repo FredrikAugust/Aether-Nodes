@@ -16,3 +16,8 @@
 .fielderror {
 	color: #c0392b;
 }
+
+/* Flashes */
+.panel {
+	margin-top:20px;
+}
