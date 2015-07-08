@@ -8,7 +8,7 @@ function getOnline() {
 		$.ajax({
 			type: 'POST',
 			url: $(element).data('url'),
-			timeout: 5000,
+			timeout: 1500,
 			error: function(x, t, m) {
 		        if(t === "timeout") {
 					var onlineChild = $(element).find('.online');
