@@ -20,3 +20,12 @@ footer {
 	margin-bottom: 30px !important;
 	color:#7f8c8d !important;
 }
+
+#refresh {
+	color: #337ab7 !important;
+	text-decoration: none !important;
+}
+
+#refresh:hover {
+	text-decoration: underline !important;
+}
