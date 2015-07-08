@@ -64,7 +64,7 @@ def index():
     
     if form.validate_on_submit():
         try:
-            online_stat = is_online(form.ip.data)
+            online_stat = True
 
             if len(form.name.data.strip()) == 0:
                 models.Entry.create(
