@@ -17,7 +17,7 @@ def ip_exist(form, field):
 def port_open(form, field):
 	if len(field.data) > 0: 
 		try:
-			socket.setdefaulttimeout(5.0)
+			socket.setdefaulttimeout(2.0)
 			# Don't know what this does, but I got it from SE and it works.
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		except Exception:

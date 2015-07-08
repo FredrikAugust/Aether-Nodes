@@ -54,7 +54,7 @@ def is_online(ip):
 
         return 'True'
     else:
-        return 'True'
+        return 'False'
 
 # Routes
 
