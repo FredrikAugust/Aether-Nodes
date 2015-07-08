@@ -11,3 +11,12 @@
 .panel {
 	margin-top:20px;
 }
+
+.online {
+	color:#7f8c8d;
+}
+
+footer {
+	margin-bottom: 30px !important;
+	color:#7f8c8d !important;
+}

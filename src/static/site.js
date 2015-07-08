@@ -1,19 +1,27 @@
 // Author is Fredrik A. Madsen-Malmo
 
+$('tr').hide() // For cool transitions later
+
 $(window).load(function() {
+	$('tr').each(function(i,e) {
+	  $(e).fadeIn(1000 + i*200);
+	});
+	
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function(index, element) {
 		$.ajax({
 			type: 'POST',
 			url: $(element).data('url'),
-			timeout: 5000,
+			timeout: 3000,
 			error: function(x, t, m) {
 		        if(t === "timeout") {
 					var onlineChild = $(element).find('.online');
 					$(onlineChild).data('online', 'False');
 
-		            $(onlineChild).css('color', '#c0392b');
-					$(onlineChild).text('Offline').fadeIn(1000);
+		            $(onlineChild).fadeOut(1000, function() {
+						$(onlineChild).css('color', '#c0392b');
+						$(onlineChild).text('Offline').fadeIn(1000);
+					});
 		        }
 		    },
 		    success: function(data) {
