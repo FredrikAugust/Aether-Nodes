@@ -41,7 +41,11 @@ def is_online(ip):
         return 'False'
 
     try:
-        socket.setdefaulttimeout(1.0)
+        if not target.online:
+            socket.setdefaulttimeout(0.5)
+        else:
+            socket.setdefaulttimeout(1.0)
+
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, int(target.port)))
     except Exception:
