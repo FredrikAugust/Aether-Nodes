@@ -99,11 +99,11 @@ $('#refresh').on('click', function (e) {
 });
 
 $('#show').on('click', function () {
-	hideOffline();
+	showOffline();
 });
 
 $('#hide').on('click', function () {
-	showOffline();
+	hideOffline();
 });
 
 // When everything is done loading
