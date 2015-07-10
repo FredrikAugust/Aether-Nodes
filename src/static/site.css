@@ -26,6 +26,6 @@ footer {
 	text-decoration: none !important;
 }
 
-#refresh:hover, .info:hover {
+#refresh:hover, #info:hover, #show:hover, #hide:hover {
 	text-decoration: underline !important;
 }
