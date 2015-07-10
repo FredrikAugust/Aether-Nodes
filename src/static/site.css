@@ -28,4 +28,5 @@ footer {
 
 #refresh:hover, #info:hover, #show:hover, #hide:hover {
 	text-decoration: underline !important;
+	cursor: pointer !important;
 }
