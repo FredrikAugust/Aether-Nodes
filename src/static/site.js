@@ -5,6 +5,7 @@ $('tr').hide() // For cool transitions later
 var offline;
 
 function getOnline () {
+	showOffline();
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function (index, element) {
 		$.ajax({
@@ -45,6 +46,8 @@ function getOnline () {
 		    }
 		});
 	});
+
+	hideOffline();
 }
 
 function showOffline () {
@@ -53,13 +56,13 @@ function showOffline () {
 		$('.entry').last().after(offline.shift()).hide().fadeIn(100);
 	});
 
+	offline = [];  // Clear the offline nodes list
+
 	$('#show').hide();
 	$('#hide').show();
 }
 
 function hideOffline () {
-	offline = [];  // Clear the offline nodes list
-
 	$('.online').each(function (index, element) {
 		if ($(element).text() == 'Offline') {
 			offline.push($(element).parent());
