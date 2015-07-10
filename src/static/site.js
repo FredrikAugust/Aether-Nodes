@@ -45,9 +45,6 @@ function getOnline () {
 		    }
 		});
 	});
-
-	// Hide offline nodes
-	hideOffline();
 }
 
 function showOffline () {
