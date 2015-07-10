@@ -21,7 +21,7 @@ footer {
 	color:#7f8c8d !important;
 }
 
-#refresh, .info {
+#refresh, #info, #show, #hide {
 	color: #337ab7 !important;
 	text-decoration: none !important;
 }
