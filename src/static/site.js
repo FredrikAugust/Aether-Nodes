@@ -56,8 +56,8 @@ function showOffline () {
 		$('.entry').last().after(offline.shift()).hide().fadeIn(100);
 	});
 
-	$('#show').show();
-	$('#hide').hide();
+	$('#show').hide();
+	$('#hide').show();
 }
 
 function hideOffline () {
@@ -70,8 +70,9 @@ function hideOffline () {
 		}
 	});
 
-	$('#show').hide();
-	$('#hide').show();
+	$('#show').show();
+	$('#hide').hide();
+
 }
 
 // Click on the refresh icon
@@ -87,15 +88,8 @@ $('#refresh').on('click', function (e) {
 			$(element).fadeIn(1000);
 		});
 	});
-
-	// Show offline nodes
-	showOffline();
-
 	// Update the status on all nodes
 	getOnline();
-
-	// Hide offline nodes
-	hideOffline();
 });
 
 $('#show').on('click', function () {
