@@ -66,7 +66,7 @@ function showOffline () {
 
 function hideOffline () {
 	$('.entry').each(function (index, element) {
-		if ($(element).css('display') == 'none') {
+		if ($(element).text() == 'Offline') {
 			$(element).fadeOut(1000);
 		}
 	});
