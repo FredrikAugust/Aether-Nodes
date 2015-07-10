@@ -6,6 +6,7 @@ var offline;
 
 function getOnline () {
 	showOffline();
+
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function (index, element) {
 		$.ajax({
@@ -41,13 +42,16 @@ function getOnline () {
 					} else {
 						$(onlineChild).css('color', '#c0392b');
 						$(onlineChild).text('Offline').fadeIn(1000);
+						offline.push($(element).parent());
+						$(element).parent().remove();
 					}
 			    });
 		    }
 		});
 	});
 
-	hideOffline();
+	$('#show').show();
+	$('#hide').hide();
 }
 
 function showOffline () {
@@ -88,6 +92,7 @@ $('#refresh').on('click', function (e) {
 			$(element).fadeIn(1000);
 		});
 	});
+
 	// Update the status on all nodes
 	getOnline();
 });
