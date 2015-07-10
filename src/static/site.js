@@ -2,11 +2,7 @@
 
 $('tr').hide() // For cool transitions later
 
-var offline;
-
 function getOnline () {
-	showOffline();
-
 	// Gets the online status with a simple ajax request
 	$('.entry').each(function (index, element) {
 		$.ajax({
@@ -19,14 +15,14 @@ function getOnline () {
 		        	// Get the online-showing part of the entry
 					var onlineChild = $(element).find('.online');
 
+					$(element).fadeOut(1000);
+
 					// Set the data-online attribute to False
 					$(onlineChild).data('online', 'False');
 
-					// Self explanatory
-		            $(onlineChild).fadeOut(1000, function() {
-						$(onlineChild).css('color', '#c0392b');
-						$(onlineChild).text('Offline').fadeIn(1000);
-					});
+					$(onlineChild).text('Offline');
+
+					$(onlineChild).css('color', '#c0392b');
 		        }
 		    },
 
@@ -39,38 +35,38 @@ function getOnline () {
 			    	if ($(onlineChild).data('online') == 'True') {
 			    		$(onlineChild).css('color', '#27ae60');
 						$(onlineChild).text('Online').fadeIn(1000);
+
+						if ($(element).css('display') == 'none') {
+							$(element).fadeIn(1000);
+						}
 					} else {
+						$(element).fadeOut(1000);
+
+						$(onlineChild).text('Offline');
+
 						$(onlineChild).css('color', '#c0392b');
-						$(onlineChild).text('Offline').fadeIn(1000);
-						offline.push($(element).parent());
-						$(element).parent().remove();
 					}
 			    });
 		    }
 		});
 	});
-
-	$('#show').show();
-	$('#hide').hide();
 }
 
 function showOffline () {
-	$(offline).each(function (index, element) {
-		// Append one offline node after the last entry and then remove the node from the array
-		$('.entry').last().after(offline.shift()).hide().fadeIn(100);
+	$('.entry').each(function (index, element) {
+		if ($(element).text() == 'Offline') {
+			$(element).fadeIn(1000);
+		}
 	});
-
-	offline = [];  // Clear the offline nodes list
 
 	$('#show').hide();
 	$('#hide').show();
 }
 
 function hideOffline () {
-	$('.online').each(function (index, element) {
+	$('.entry').each(function (index, element) {
 		if ($(element).text() == 'Offline') {
-			offline.push($(element).parent());
-			$(element).parent().remove();
+			$(element).fadeOut(1000);
 		}
 	});
 
