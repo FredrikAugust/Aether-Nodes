@@ -17,8 +17,12 @@
 }
 
 footer {
-	margin-bottom: 30px !important;
+	margin-bottom: 20px !important;
 	color:#7f8c8d !important;
+}
+
+#donate {
+	margin-bottom: 10px !important;
 }
 
 #refresh, #info, #show, #hide {
@@ -34,4 +38,8 @@ footer {
 #export-content {
 	font-family: monospace;
 	word-wrap:break-word !important;
+}
+
+#bc-address:hover {
+	color:#28a4c9;
 }
