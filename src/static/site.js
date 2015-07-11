@@ -102,6 +102,20 @@ $('#hide').on('click', function () {
 	hideOffline();
 });
 
+// Exporting
+$('#export').on('click', function () {
+	var content = [];
+
+	$('.entry').each(function (index, element) {
+		if ($(element).find('.online').data('online') == 'True') {
+			content.push($(element).find('.ip').text() + ':' + $(element).find('.port').text());
+		}
+	});
+
+	$('#export-content').text(content.join(', '));
+	$('#export-content').show();
+});
+
 // When everything is done loading
 $(window).load(function () {
 	$('tr').each(function (i,e) {
@@ -111,7 +125,7 @@ $(window).load(function () {
 	getOnline();
 
 	// Fades away each panel after 1 second + 1 second for each panel
-	$('.panel').each(function (index, element) {
+	$('.flash-message').each(function (index, element) {
 		setTimeout(function () { $(element).fadeOut() }, 2000 + parseInt(index) * 1000)
 	});
 });

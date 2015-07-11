@@ -30,3 +30,7 @@ footer {
 	text-decoration: underline !important;
 	cursor: pointer !important;
 }
+
+#export-content {
+	font-family: monospace;
+}
