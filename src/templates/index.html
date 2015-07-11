@@ -38,7 +38,7 @@
 		{% endwith %}
 
 		<div class='row'>
-			<div class='col-xs-12 col-md-6'>
+			<div class='col-xs-12 col-sm-6'>
 				<h1>New entry</h1><hr>
 				<form class='form' action='{{ url_for('index') }}' method='POST'>
 					{{ form.hidden_tag() }}
@@ -58,7 +58,7 @@
 			</div>
 			<div class'col-xs-12 col-sm-6'>
 				<h1>Export</h1><hr>
-				<div class="panel-body panel panel-default" id='export-content' style='display:none;'>
+				<span class="panel-body panel panel-default" id='export-content' style='display:none;'></span>
 				<button id='export' class='btn btn-info'>Export online nodes</button>
 			</div>
 		</div>
