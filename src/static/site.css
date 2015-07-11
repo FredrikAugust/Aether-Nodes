@@ -33,4 +33,5 @@ footer {
 
 #export-content {
 	font-family: monospace;
+	word-wrap:break-word !important;
 }
