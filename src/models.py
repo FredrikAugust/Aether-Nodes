@@ -17,7 +17,7 @@ result = re.search(
             '''
             (?P<dbname>[\w]+)\:\/\/
             (?P<username>[\w]+)\:
-            (?P<password>[\w\d]+)\@
+            (?P<password>[\w\d\-]+)\@
             (?P<server>[\w\d\.\-]+):
             (?P<port>[\d]+)\/
             (?P<database>[\w\d]+)\n
