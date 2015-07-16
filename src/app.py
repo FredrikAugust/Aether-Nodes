@@ -36,13 +36,13 @@ def after_request(response):
 
 # Other functions
 
-@app.route('/online/<userip>', methods=['POST', 'GET'])
-def is_online(userip):
+@app.route('/online/<ip>', methods=['POST', 'GET'])
+def is_online(ip):
     '''Gets a request for a user and returns if the user is online.
     Also set\'s the online status of the user in the db.'''
 
     try:
-        target = models.Entry.get(models.Entry.ip == userip)
+        target = models.Entry.get(models.Entry.ip == ip)
     except models.Entry.DoesNotExist:
         return 'False'
 
@@ -53,7 +53,7 @@ def is_online(userip):
             socket.setdefaulttimeout(1.0)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        result = sock.connect_ex((userip, int(target.port)))
+        result = sock.connect_ex((ip, int(target.port)))
     except (socket.error, socket.timeout):
         target.online = False
         target.save()

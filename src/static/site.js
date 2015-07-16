@@ -18,11 +18,9 @@ function getOnline () {
 					$(element).fadeOut(1000);
 
 					// Set the data-online attribute to False
-					$(onlineChild).data('online', 'False');
-
-					$(onlineChild).text('Offline').fadeIn(1000);
-
-					$(onlineChild).css('color', '#c0392b');
+					$(onlineChild).data('online', 'False')
+								  .text('Offline').fadeIn(1000)
+								  .css('color', '#c0392b');
 		        }
 		    },
 
@@ -34,8 +32,9 @@ function getOnline () {
 
 			    $(onlineChild).fadeOut(1000, function () {
 			    	if ($(onlineChild).data('online') == 'True') {
-			    		$(onlineChild).css('color', '#27ae60');
-						$(onlineChild).text('Online').fadeIn(1000);
+			    		$(onlineChild).css('color', '#27ae60')
+			    					  .text('Online')
+			    					  .fadeIn(1000);
 
 						if ($(element).css('display') == 'none') {
 							$(element).fadeIn(1000);
@@ -84,9 +83,9 @@ $('#refresh').on('click', function (e) {
 	// For each of the Online-status <td>-s
 	$('.online').each(function (index, element) {
 		$(element).fadeOut(1000, function () {
-			$(element).text('Refreshing..');
-			$(element).css('color', '#7f8c8d');
-			$(element).fadeIn(1000);
+			$(element).text('Refreshing..')
+					  .css('color', '#7f8c8d')
+					  .fadeIn(1000);
 		});
 	});
 
