@@ -9,7 +9,7 @@ import forms
 
 __author__ = 'Fredrik A. Madsen-Malmo'
 
-DEBUG = True
+DEBUG = False
 PORT = int(os.environ.get('PORT', 33507))
 HOST = '0.0.0.0'
 
