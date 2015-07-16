@@ -1,45 +1,45 @@
 .port, .ip {
-	font-family: monospace;
+    font-family: monospace;
 }
 
 /* Field errors */
 .fielderror {
-	color: #c0392b;
+    color: #c0392b;
 }
 
 /* Flashes */
 .flash-message {
-	margin-top:20px;
+    margin-top:20px;
 }
 
 .online {
-	color:#7f8c8d;
+    color:#7f8c8d;
 }
 
 footer {
-	margin-bottom: 20px !important;
-	color:#7f8c8d !important;
+    margin-bottom: 20px !important;
+    color:#7f8c8d !important;
 }
 
 #donate {
-	margin-bottom: 10px !important;
+    margin-bottom: 10px !important;
 }
 
 #refresh, #info, #show, #hide {
-	color: #337ab7 !important;
-	text-decoration: none !important;
+    color: #337ab7 !important;
+    text-decoration: none !important;
 }
 
 #refresh:hover, #info:hover, #show:hover, #hide:hover {
-	text-decoration: underline !important;
-	cursor: pointer !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
 }
 
 #export-content {
-	font-family: monospace;
-	word-wrap:break-word !important;
+    font-family: monospace;
+    word-wrap:break-word !important;
 }
 
 #bc-address:hover {
-	color:#28a4c9;
+    color:#28a4c9;
 }

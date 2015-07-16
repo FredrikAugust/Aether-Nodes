@@ -23,8 +23,6 @@ function getOnline () {
 								  .css('color', '#c0392b');
 		        }
 		    },
-
-		    // See above
 		    success: function (data) {
 		    	var onlineChild = $(element).find('.online');
 
@@ -72,9 +70,7 @@ function hideOffline () {
 
 	$('#show').show();
 	$('#hide').hide();
-
 }
-
 // Click on the refresh icon
 $('#refresh').on('click', function (e) {
 	// Don't redirect

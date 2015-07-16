@@ -13,8 +13,7 @@ FULL = os.environ.get('DATABASE_URL', 'error')
 
 # Get db content
 
-result = re.search(
-            '''
+result = re.search('''
             (?P<dbname>[\w]+)\:\/\/
             (?P<username>[\w]+)\:
             (?P<password>[\w\d\-]+)\@
@@ -42,6 +41,10 @@ class Entry(Model):
     online = BooleanField(default=False)
 
     class Meta:
+        '''This is used to specify extra information about the model.
+        Such as the database to use, and how to sort it.
+        '''
+
         database = DATABASE
         order_by = ('online',)
 
