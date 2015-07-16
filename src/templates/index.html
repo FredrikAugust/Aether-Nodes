@@ -14,14 +14,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
 	<link rel="stylesheet" href="../static/site.css">
-	
+
 	<!-- Google Analytics -->
 	<script>
 	  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-	
+
 	  ga("create", "UA-49950351-7", "auto");
 	  ga("send", "pageview");
 	</script>
@@ -71,12 +71,12 @@
 					<th>Name</th>
 					<th>IP</th>
 					<th>Port</th>
-					<th>Online <a class="glyphicon glyphicon-question-sign small" id="info" title="This doesn"t necessarily mean that you"re offline, only that the IP + port doesn"t respond to a ping from my heroku server. I have also set the timeout of the ping to 1000ms, so if you 1000ms+ ping then you will be displayed as offline."></th>
+					<th>Online <a class="glyphicon glyphicon-question-sign small" id="info" title="This doesn't necessarily mean that you're offline, only that the IP + port doesn't respond to a ping from my heroku server. I have also set the timeout of the ping to 1000ms, so if you 1000ms+ ping then you will be displayed as offline."></a></th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for entry in stream %}
-					<tr class="entry" data-url="{{ url_for("is_online", ip=entry.ip) }}" data-ip="{{ entry.ip }}" data-port="{{ entry.port }}" >
+					<tr class="entry" data-url="{{ url_for('is_online', ip=entry.ip) }}" data-ip="{{ entry.ip }}" data-port="{{ entry.port }}">
 						<td>{{ entry.name }}</td>
 						<td class="ip">{{ entry.ip }}</td>
 						<td class="port">{{ entry.port }}</td>
@@ -92,7 +92,7 @@
 			<p class="small">© Fredrik A. Madsen-Malmo 2015 | <a href="https://github.com/fredrikaugust/Aether-Nodes.git">Source on Github</a> | <a href="https://www.changetip.com/tipme/MrMadsenMalmo" target="_blank">Donate using bitcoin</a></p>
 		</footer>
 	</div>
-	
+
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
