@@ -13,75 +13,74 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-	<link rel='stylesheet' href='../static/site.css'>
+	<link rel="stylesheet" href="../static/site.css">
 	
 	<!-- Google Analytics -->
 	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
 	
-	  ga('create', 'UA-49950351-7', 'auto');
-	  ga('send', 'pageview');
-	
+	  ga("create", "UA-49950351-7", "auto");
+	  ga("send", "pageview");
 	</script>
 </head>
 <body>
-	<div class='container'>
+	<div class="container">
 		{% with messages = get_flashed_messages(with_categories=True) %}
 			{% for category, message in messages %}
-				<div class='panel flash-message panel-{{ category }}'>
-					<div class='panel-body'>{{ message }}</div>
+				<div class="panel flash-message panel-{{ category }}">
+					<div class="panel-body">{{ message }}</div>
 				</div>
 			{% endfor %}
 		{% endwith %}
 
-		<div class='row'>
-			<div class='col-xs-12 col-sm-6'>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
 				<h1>New entry</h1><hr>
-				<form class='form' action='{{ url_for('index') }}' method='POST'>
+				<form class="form" action="{{ url_for('index') }}" method="POST">
 					{{ form.hidden_tag() }}
 					{% for field in form %}
 						{% if field.errors %}
 							{% for error in field.errors %}
-								<span class='fielderror'>
+								<span class="fielderror">
 									{{ error }}
 								</span>
 							{% endfor %}
 						{% endif %}
 
-						{{ field(placeholder=field.label.text, class_='form-control form-group') }}
+						{{ field(placeholder=field.label.text, class_="form-control form-group") }}
 					{% endfor %}
-					<button class='btn btn-default submit_new' type='submit'>Create entry</button>
+					<button class="btn btn-default submit_new" type="submit">Create entry</button>
 				</form>
 			</div>
-			<div class='col-xs-12 col-sm-6'>
+			<div class="col-xs-12 col-sm-6">
 				<h1>Export</h1><hr>
-				<div class="panel-body panel panel-default" id='export-content' style='display:none;'></div>
-				<button id='export' class='btn btn-info'>Export online nodes</button>
+				<div class="panel-body panel panel-default" id="export-content" style="display:none;"></div>
+				<button id="export" class="btn btn-info">Export online nodes</button>
 			</div>
 		</div>
 
 		<hr>
 
-		<h1>Entries <a id='refresh' href='#' class='glyphicon small glyphicon-repeat'></a> <a class='glyphicon glyphicon-eye-open small' id='show'></a> <a style='display:none;' class='glyphicon glyphicon-eye-close small' id='hide'></a></h1>
-		<table class='table'>
+		<h1>Entries <a id="refresh" href="#" class="glyphicon small glyphicon-repeat"></a> <a class="glyphicon glyphicon-eye-open small" id="show"></a> <a style="display:none;" class="glyphicon glyphicon-eye-close small" id="hide"></a></h1>
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>IP</th>
 					<th>Port</th>
-					<th>Online <a class='glyphicon glyphicon-question-sign small' id='info' title="This doesn't necessarily mean that you're offline, only that the IP + port doesn't respond to a ping from my heroku server. I have also set the timeout of the ping to 1000ms, so if you 1000ms+ ping then you will be displayed as offline."></th>
+					<th>Online <a class="glyphicon glyphicon-question-sign small" id="info" title="This doesn"t necessarily mean that you"re offline, only that the IP + port doesn"t respond to a ping from my heroku server. I have also set the timeout of the ping to 1000ms, so if you 1000ms+ ping then you will be displayed as offline."></th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for entry in stream %}
-					<tr class='entry' data-url='{{ url_for('is_online', ip=entry.ip) }}' data-ip='{{ entry.ip }}' data-port='{{ entry.port }}' >
+					<tr class="entry" data-url="{{ url_for("is_online", ip=entry.ip) }}" data-ip="{{ entry.ip }}" data-port="{{ entry.port }}" >
 						<td>{{ entry.name }}</td>
-						<td class='ip'>{{ entry.ip }}</td>
-						<td class='port'>{{ entry.port }}</td>
-						<td class='online' data-online='{{ entry.online }}'>Retrieving..</td>
+						<td class="ip">{{ entry.ip }}</td>
+						<td class="port">{{ entry.port }}</td>
+						<td class="online" data-online="{{ entry.online }}">Retrieving..</td>
 					</tr>
 				{% endfor %}
 			</tbody>
@@ -90,7 +89,7 @@
 		<hr>
 
 		<footer>
-			<p class="small">© Fredrik A. Madsen-Malmo 2015 | <a href="https://github.com/fredrikaugust/Aether-Nodes.git">Source on Github</a> | <a href="https://www.changetip.com/tipme/MrMadsenMalmo" target='_blank'>Donate using bitcoin</a></p>
+			<p class="small">© Fredrik A. Madsen-Malmo 2015 | <a href="https://github.com/fredrikaugust/Aether-Nodes.git">Source on Github</a> | <a href="https://www.changetip.com/tipme/MrMadsenMalmo" target="_blank">Donate using bitcoin</a></p>
 		</footer>
 	</div>
 	
@@ -100,6 +99,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-	<script src='../static/site.js'></script>
+	<script src="../static/site.js"></script>
 </body>
 </html>

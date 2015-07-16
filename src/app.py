@@ -1,20 +1,21 @@
-__author__ = 'Fredrik A. Madsen-Malmo'
+'''This is the main file for the aether nodes project'''
 
-from flask import Flask, flash, render_template, g, redirect, url_for
-
+from flask import Flask, flash, render_template, g
 import socket
+import os
 
 import models
 import forms
 
-import os
+__author__ = 'Fredrik A. Madsen-Malmo'
 
 DEBUG = True
-PORT = port = int(os.environ.get('PORT', 33507))
+PORT = int(os.environ.get('PORT', 33507))
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('secret_key', 'error')
+
 
 # Before and after request
 
@@ -24,20 +25,25 @@ def before_request():
     g.db = models.DATABASE
     g.db.connect()
 
+
 @app.after_request
 def after_request(response):
-	"""Close the db connection after each req"""
-	g.db.close()
+    """Close the db connection after each req"""
+    g.db.close()
 
-	return response
+    return response
+
 
 # Other functions
 
-@app.route('/online/<ip>', methods=['POST', 'GET'])
-def is_online(ip):
+@app.route('/online/<userip>', methods=['POST', 'GET'])
+def is_online(userip):
+    '''Gets a request for a user and returns if the user is online.
+    Also set\'s the online status of the user in the db.'''
+
     try:
-        target = models.Entry.get(models.Entry.ip == ip)
-    except Exception:
+        target = models.Entry.get(models.Entry.ip == userip)
+    except models.Entry.DoesNotExist:
         return 'False'
 
     try:
@@ -47,8 +53,8 @@ def is_online(ip):
             socket.setdefaulttimeout(1.0)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        result = sock.connect_ex((ip, int(target.port)))
-    except Exception:
+        result = sock.connect_ex((userip, int(target.port)))
+    except (socket.error, socket.timeout):
         target.online = False
         target.save()
 
@@ -65,31 +71,33 @@ def is_online(ip):
 
         return 'False'
 
+
 # Routes
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    '''Get\'s users from the db and sorts by online status.
+    If the new entry form is passed it will try to create
+    an entry
+    '''
+
     stream = models.Entry.select().order_by(-models.Entry.online)
     form = forms.EntryForm()
-    
+
     if form.validate_on_submit():
-        try:
-            if len(form.name.data.strip()) == 0:
-                models.Entry.create(
-                    ip=form.ip.data.strip(),
-                    port=form.port.data.strip(),
-                    online=True)
-            else:
-                models.Entry.create(
-                    name=form.name.data.strip(),
-                    ip=form.ip.data.strip(),
-                    port=form.port.data.strip(),
-                    online=True)
+        if len(form.name.data.strip()) == 0:
+            models.Entry.create(
+                ip=form.ip.data.strip(),
+                port=form.port.data.strip(),
+                online=True)
+        else:
+            models.Entry.create(
+                name=form.name.data.strip(),
+                ip=form.ip.data.strip(),
+                port=form.port.data.strip(),
+                online=True)
 
-            flash('Entry created.', 'success')
-
-        except Exception:
-            pass
+        flash('Entry created.', 'success')
     else:
         pass
 
@@ -102,10 +110,10 @@ if __name__ == '__main__':
 
     try:
         models.Entry.get(models.Entry.ip == '93.184.204.215')
-    except Exception:
+    except models.Entry.DoesNotExist:
         models.Entry.create(
-        name='fotoply',
-        ip='93.184.204.215',
-        port='7077')
+            name='fotoply',
+            ip='93.184.204.215',
+            port='7077')
 
     app.run(debug=DEBUG, port=PORT, host=HOST)

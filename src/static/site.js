@@ -1,6 +1,6 @@
 // Author is Fredrik A. Madsen-Malmo
 
-$('tr').hide() // For cool transitions later
+$('tr').hide(); // For cool transitions later
 
 function getOnline () {
 	// Gets the online status with a simple ajax request
@@ -79,7 +79,7 @@ function hideOffline () {
 // Click on the refresh icon
 $('#refresh').on('click', function (e) {
 	// Don't redirect
-	e.preventDefault()
+	e.preventDefault();
 
 	// For each of the Online-status <td>-s
 	$('.online').each(function (index, element) {
@@ -126,6 +126,6 @@ $(window).load(function () {
 
 	// Fades away each panel after 1 second + 1 second for each panel
 	$('.flash-message').each(function (index, element) {
-		setTimeout(function () { $(element).fadeOut() }, 2000 + parseInt(index) * 1000)
+		setTimeout(function () { $(element).fadeOut(); }, 2000 + parseInt(index) * 1000);
 	});
 });
